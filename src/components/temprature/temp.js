@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import { Form, FormGroup, Input } from 'reactstrap'
 
-const Temp = ()=> {
+const TempComponent = ()=> {
 
       const [search, setSearch] = useState('Delhi');
       const [city, setcity] = useState(null);
 
+
+      
+
+      // Use Effect Method to call API
       useEffect(() => {
 
             const fetchAPI = async ()=> {
-                  const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=4a36212207f0face69ede65f8d6fa2f6`;
-                  const response = await fetch(url);
+                  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=4a36212207f0face69ede65f8d6fa2f6`);
                   const resJSON = await response.json();
                   setcity(resJSON.main);
             }
+
             fetchAPI();
 
       }, [search]);
       
+
+      // Input change value for searching
       const inputGetVal = (e)=> {
             const val = e.target.value;
             setSearch(val);
@@ -49,4 +55,4 @@ const Temp = ()=> {
       );
 }
 
-export default Temp
+export default TempComponent
